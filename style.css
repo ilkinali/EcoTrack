@@ -1,0 +1,284 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f9fafb;
+    color: #2d3748;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Header */
+.header {
+    background: #ffffff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.8rem;
+    color: #38a169;
+    font-weight: bold;
+}
+
+.menu-toggle, .dark-toggle {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #2d3748;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+/* Sidebar */
+.sidebar {
+    background: #38a169;
+    color: white;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Sidebar nav */
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nav-item {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    transition: background 0.2s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: #2f855a;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: calc(100vh - 80px);
+    text-align: center;
+}
+
+/* Landing Page */
+.landing-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.landing-content h2 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.landing-content p {
+    font-size: 1.1rem;
+    color: #4a5568;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.button-group button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #38a169;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.button-group button.orange {
+    background: #ed8936;
+}
+
+.button-group button:hover {
+    opacity: 0.9;
+}
+
+/* Forms */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+input, select, button {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    border-color: #38a169;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(56,161,105,0.2);
+}
+
+button {
+    background: #38a169;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease;
+}
+
+button.orange {
+    background: #ed8936;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button.danger {
+    background: #e53e3e;
+}
+
+button.danger:hover {
+    background: #c53030;
+}
+
+/* Cards */
+.card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+/* Error */
+.error {
+    color: #e53e3e;
+    font-size: 0.9rem;
+}
+
+/* Links */
+.link {
+    color: #38a169;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Charts */
+canvas {
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+}
+
+/* Dark Mode */
+body.dark {
+    background: #1a202c;
+    color: #edf2f7;
+}
+
+body.dark .header, 
+body.dark .main-content, 
+body.dark .card, 
+body.dark input, 
+body.dark select, 
+body.dark button {
+    background: #2d3748;
+    color: #edf2f7;
+}
+
+body.dark input::placeholder {
+    color: #a0aec0;
+}
+
+body.dark .sidebar {
+    background: #2d3748;
+}
+
+body.dark .nav-item:hover, body.dark .nav-item.active {
+    background: #4a5568;
+}
+
+body.dark .menu-toggle, body.dark .dark-toggle {
+    color: #edf2f7;
+}
+
+/* Sidebar Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+}

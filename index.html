@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoTrack - Carbon Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <button class="menu-toggle" id="menuToggle">☰</button>
+  <h1 class="logo">EcoTrack</h1>
+  <button id="darkModeToggle" class="dark-toggle">🌓</button>
+</header>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <img id="avatar" src="https://via.placeholder.com/50" alt="User Avatar" class="avatar">
+    <span id="userName"></span>
+  </div>
+  <nav class="nav">
+    <button id="showProfile" class="nav-item active">👤 Profile</button>
+    <button id="showActivity" class="nav-item">🚲 Activity</button>
+    <button id="showAchievements" class="nav-item">🏆 Achievements</button>
+    <button id="showLeaderboard" class="nav-item">🏅 Leaderboard</button>
+    <button id="logout" class="nav-item">🔓 Log Out</button>
+  </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Landing Page -->
+  <section id="landing" class="section active center">
+    <div class="landing-content">
+      <h2>Welcome to <span class="highlight">EcoTrack</span></h2>
+      <p>Track your carbon footprint easily.</p>
+      <div class="button-group">
+        <button id="showLogin">Log In</button>
+        <button id="showRegister" class="orange">Sign Up</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login Form -->
+  <section id="login" class="section center">
+    <form id="loginForm" class="form">
+      <h2>Log In</h2>
+      <input type="email" id="loginEmail" placeholder="Email" required>
+      <input type="password" id="loginPassword" placeholder="Password" required>
+      <button type="submit">Log In</button>
+      <p class="error" id="loginError"></p>
+      <p class="link" id="showForgotPassword">Forgot Password?</p>
+      <p class="link" id="backToLandingFromLogin">Back to Home</p>
+    </form>
+  </section>
+
+  <!-- Register Form -->
+  <section id="register" class="section center">
+    <form id="registerForm" class="form">
+      <h2>Sign Up</h2>
+      <input type="email" id="registerEmail" placeholder="Email" required>
+      <input type="text" id="registerName" placeholder="Name" required>
+      <input type="password" id="registerPassword" placeholder="Password" required>
+      <button type="submit" class="orange">Sign Up</button>
+      <p class="error" id="registerError"></p>
+      <p class="link" id="backToLandingFromRegister">Back to Home</p>
+    </form>
+  </section>
+
+  <!-- Forgot Password -->
+  <section id="forgotPassword" class="section center">
+    <form id="forgotPasswordForm" class="form">
+      <h2>Forgot Password</h2>
+      <input type="email" id="forgotEmail" placeholder="Email" required>
+      <button type="submit">Reset Password</button>
+      <p class="error" id="forgotError"></p>
+      <p class="link" id="backToLoginFromForgot">Back to Login</p>
+    </form>
+  </section>
+
+  <!-- Dashboard Pages -->
+  <section id="dashboard" class="section">
+
+    <!-- Profile -->
+    <div id="profile" class="content-panel active">
+      <h2>Profile Settings</h2>
+      <div class="card">
+        <input type="file" id="uploadImage" accept="image/*">
+        <button id="cropImageButton">Crop and Save</button>
+        <div id="cropContainer" style="display:none;">
+          <img id="cropImage" style="max-width:100%;">
+        </div>
+        <hr>
+        <label for="language">Language</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="ro">Romanian</option>
+        </select>
+        <input type="password" id="newPassword" placeholder="New Password">
+        <button id="changePassword">Change Password</button>
+        <button id="deleteAccount" class="danger">Delete Account</button>
+      </div>
+    </div>
+
+    <!-- Activity -->
+    <div id="activity" class="content-panel">
+      <h2>Add Activity</h2>
+      <div class="card">
+        <form id="activityForm" class="form">
+          <select id="transport">
+            <option value="0">Select Transport</option>
+            <option value="0.192">Car</option>
+            <option value="0.103">Bus</option>
+            <option value="0.027">Bike</option>
+            <option value="0">Walking</option>
+          </select>
+          <input type="number" id="transportKm" placeholder="Distance (km)" min="0">
+          <input type="number" id="energy" placeholder="Energy Usage (kWh)" min="0">
+          <select id="food">
+            <option value="0">Select Food</option>
+            <option value="4.8">Beef</option>
+            <option value="1.2">Chicken</option>
+            <option value="0.5">Vegetarian</option>
+          </select>
+          <button type="submit">Submit Activity</button>
+          <p class="error" id="activityError"></p>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Today's Overview</h3>
+        <p>CO₂ Saved: <span id="co2Saved">0</span> kg</p>
+        <p>Distance Traveled: <span id="totalDistance">0</span> km</p>
+        <canvas id="pieChart"></canvas>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Achievements -->
+    <div id="achievements" class="content-panel">
+      <h2>Achievements</h2>
+      <div class="card" id="medals"></div>
+    </div>
+
+    <!-- Leaderboard -->
+    <div id="leaderboard" class="content-panel">
+      <h2>Leaderboard</h2>
+      <div class="card" id="leaderboardList"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="app.js"></script>
+
+<script>
+// Toggle sidebar mobile
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('active');
+});
+</script>
+
+</body>
+</html>
