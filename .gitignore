@@ -1,0 +1,19 @@
+# Node.js
+node_modules/
+.env
+
+# Logs
+*.log
+
+# OS və IDE faylları
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak
+*.tmp
